@@ -1,9 +1,5 @@
-RSpec.describe ActionSubscriber::Opentracing do
+RSpec.describe ActionSubscriber::OpenTracing do
   it "has a version number" do
-    expect(ActionSubscriber::Opentracing::VERSION).not_to be nil
-  end
-
-  it "does something useful" do
-    expect(false).to eq(true)
+    expect(ActionSubscriber::OpenTracing::VERSION).not_to be nil
   end
 end
