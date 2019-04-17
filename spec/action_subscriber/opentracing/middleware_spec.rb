@@ -32,11 +32,12 @@ RSpec.describe ActionSubscriber::OpenTracing::Middleware do
       expect(::OpenTracing.global_tracer.spans.first.operation_name).to eq "FakeSubscriber#fake_action"
     end
 
-    it "tags the active span with routing key and applicable headers" do
+    it "tags the active span with routing key and applicable headers/information" do
       middleware.call(env)
       tags = ::OpenTracing.global_tracer.spans.first.tags
       expect(tags["routing_key"]).to eq properties[:routing_key]
       expect(tags["published_at"]).to eq properties[:headers]["published_at"]
+      expect(tags["processed_at"]).to_not be_nil
     end
 
     it "references parent span as follows_from when tracing context is found in the headers" do

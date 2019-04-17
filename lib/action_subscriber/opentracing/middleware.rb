@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "opentracing"
 
 module ActionSubscriber
@@ -17,6 +19,7 @@ module ActionSubscriber
         options[:tags] = {}
         options[:tags]["routing_key"] = env.routing_key
         options[:tags]["published_at"] = published_at if published_at
+        options[:tags]["processed_at"] = Time.now.strftime("%F %T.%3N %Z")
 
         result = nil
         ::OpenTracing.start_active_span(operation, options) do
