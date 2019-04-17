@@ -37,8 +37,11 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "opentracing"
 
+  spec.add_development_dependency "action_subscriber", "~> 5.1.3"
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "mad_rubocop"
+  spec.add_development_dependency "opentracing_test_tracer"
+  spec.add_development_dependency "pry"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"
 end
