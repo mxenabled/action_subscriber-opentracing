@@ -8,9 +8,5 @@ matrix:
   allow_failures:
     - rvm: ruby-head
 
-before_install:
-  - gem update --system
-  - bundle install
-
 script:
   - bundle exec rake
