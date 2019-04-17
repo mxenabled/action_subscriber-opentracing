@@ -1,5 +1,11 @@
+require "opentracing"
+require "opentracing_test_tracer"
+require "action_subscriber"
+
 require "bundler/setup"
 require "action_subscriber/opentracing"
+
+require "fake_subscriber.rb"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
