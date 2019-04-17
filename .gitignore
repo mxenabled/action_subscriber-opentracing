@@ -1,0 +1,17 @@
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+
+# lockfile
+Gemfile.lock
+
+# local rspec config
+.rspec-local
+
+# rspec failure tracking
+.rspec_status
