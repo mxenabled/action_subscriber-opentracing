@@ -38,5 +38,23 @@ RSpec.describe ActionSubscriber::OpenTracing::Middleware do
       expect(tags["routing_key"]).to eq properties[:routing_key]
       expect(tags["published_at"]).to eq properties[:headers]["published_at"]
     end
+
+    it "references parent span as follows_from when tracing context is found in the headers" do
+      # Create a span only toinject the context into the headers in the test
+      # properties.
+      ::OpenTracing.start_active_span("parent") do
+        ::OpenTracing.inject(::OpenTracing.active_span.context,
+                             ::OpenTracing::FORMAT_TEXT_MAP,
+                             properties[:headers])
+      end
+
+      middleware.call(env)
+
+      parent_span = OpenTracing.global_tracer.spans.first
+      child_span = OpenTracing.global_tracer.spans.last
+
+      expect(child_span.references.first.context.trace_id).to eq parent_span.context.trace_id
+      expect(child_span.references.first.type).to eq "follows_from"
+    end
   end
 end
