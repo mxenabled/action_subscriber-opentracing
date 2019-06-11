@@ -29,7 +29,7 @@ RSpec.describe ActionSubscriber::OpenTracing::Middleware do
 
     it "uses the subscriber and action in the operation name" do
       middleware.call(env)
-      expect(::OpenTracing.global_tracer.spans.first.operation_name).to eq "FakeSubscriber#fake_action"
+      expect(::OpenTracing.global_tracer.spans.first.operation_name).to eq "Subscriber FakeSubscriber#fake_action"
     end
 
     it "tags the active span with routing key and applicable headers/information" do
